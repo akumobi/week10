@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        body{
+            background-color: black;
+        }
+        main{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            gap: 30px;
+            background-color: black;
+        }
+
+        main input{
+            outline: none;
+            border: none;
+            text-align: center;
+            border-radius: 10px;
+            width: 80%;
+            padding-block: 10px;
+            padding-inline-start: 10px;
+            background-color: transparent;
+            border-bottom: 1px solid whitesmoke;
+            color: white;
+            font-size: larger;
+        }
+        
+        h1{
+            text-align: center;
+            text-transform: uppercase;
+            color: white;
+        }
+        main input::placeholder{
+            color: grey;
+            
+        }
+
+        main div{
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            width: 50%;
+            gap: 30px;
+        }
+
+        main button{
+            border: none;
+            border-radius: 10px;
+            width: 20%;
+            padding-block: 10px;
+            text-transform: capitalize;
+            font-size: xx-large;
+            cursor: pointer;
+        }
+        main button:hover{
+            color: white;
+            background-color: #777;
+        }
+
+        main section{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: 20px;
+            color: white;
+            background-color: gainsboro;
+            width: 70%;
+            height: 150px;
+            border-radius: 10px;
+            padding: 20px;
+        }
+        main section p{
+            text-align: center;
+            
+        }
+        .divs{
+            margin: auto;
+            height: 80%;
+            width: 100%;
+            border-radius: 10px;
+            padding: 10px;
+            border-bottom: 4px solid #777;
+            background-color: black;
+            font-size: larger;
+            font-weight: lighter;
+        }
+    </style>
+</head>
+<body>
+    
+    <main>
+        <h1>BMI Calculator</h1>
+        <div>
+            <input type="number" name="number" id="weight" placeholder="Enter your weight in kg">
+            <input type="number" name="number" id="height" placeholder="Enter your height in meter">
+        </div>
+        <button type="submit">Check BMI</button>
+
+        <section>
+            <div class="divs" id="div1"></div>
+            <div class="divs" id="div2"></div>
+            <div class="divs" id="div3"></div>
+        </section>
+    </main>
+</body>
+<script>
+    const btn = document.querySelector('button');
+    const weight = document.querySelector('#weight');
+    const height = document.querySelector('#height');
+    const sect = document.querySelectorAll('section div');
+    const result = document.createElement('p');
+    const stat = document.createElement('p');
+    const report = document.createElement('p');
+    
+    // inp.addEventListener('change', bmiCalc);
+    // bmiValue.addEventListener('input', bmiCalc);
+    btn.addEventListener('click', bmiCalc);
+    
+    
+    function bmiCalc() {
+        sect[0].append(result);
+        sect[1].append(stat);
+        sect[2].append(report);
+        
+        const bmiValue = weight.value / Math.pow(height.value, 2);
+        const bmiValFixed = bmiValue.toFixed(2);
+        const unit = `kg/m<sup>2`;
+        
+        result.innerHTML = weight.value > 0 && height.value > 0 ? `Your BMI is ${bmiValFixed} ${unit}`: `Enter correct weight and height values`;
+
+        stat.innerHTML = bmiValFixed > 0 && bmiValFixed < 18.5 ? `You're Underweight`:
+        bmiValFixed >= 18.5 && bmiValFixed < 24.5 ? `You're Healthy`:
+        bmiValFixed >= 24.5 && bmiValFixed < 30 ? `You're Overweight`:
+        bmiValFixed > 30 ? `You're Obessed`: 
+        weight.value == 0 && height.value == 0 ? `Enter correct weight and height values`: 'You need medical prayers';
+        
+        report.innerHTML = bmiValFixed > 0 && bmiValFixed < 18.5? `Eat and exercise properly`:
+        bmiValFixed >= 18.5 && bmiValFixed < 24.5 ? `Maintain your balance`:
+        bmiValFixed >= 24.5 && bmiValFixed < 30 ? `Cut down on junks`:
+        bmiValFixed > 30 ? `Take your health more seriously`: 
+        weight.value == 0 && height.value == 0 ? `Enter correct weight and height values`: 'You need medical prayers';
+        
+    }
+</script>
+</html>
