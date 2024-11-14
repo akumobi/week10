@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Palindrome Checker</title>
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        main {
+            text-align: center;
+            background: white;
+            padding: 2em;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 1em;
+            color: #4CAF50;
+        }
+
+        input[type="text"] {
+            padding: 0.5em;
+            font-size: 1em;
+            width: 80%;
+            max-width: 300px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 1em;
+            outline: none;
+            transition: border-color 0.3s ease-in;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4CAF50;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-top: 1em;
+            color: #555;
+        }
+        
+        .palindrome {
+            color: #4CAAC4;
+            font-weight: bold;
+        }
+
+        .not-palindrome {
+            color: #e5335e;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Palindrome Checker</h1>
+        <input type="text" name="pal" id="pal" placeholder="Enter text to check for Palindrome">
+        <p></p>
+    </main>
+    
+</body>
+<script>
+    const input = document.querySelector('input')
+    const result = document.querySelector('p')
+    input.addEventListener('input', palChecker)
+
+    function palChecker(){
+        const tester = /[a-z0-9]/ig
+        const tested = input.value
+        const matchTest = tested.match(tester).join('').toLowerCase()
+        const reverseTest = tested.match(tester).reverse().join('').toLowerCase()
+        const dispReg = /[a-z0-9\w]/gi
+
+        result.innerHTML = matchTest == reverseTest ? `${tested.match(dispReg).join('').toLowerCase()} is a Palindrome` : `${input.value} is NOT a Palindrome`
+
+        result.classList.add(matchTest === reverseTest && matchTest !== '' ? 'palindrome' : 'not-palindrome');
+        result.classList.remove(matchTest === reverseTest && matchTest !== '' ? 'not-palindrome' : 'palindrome');
+
+        input.classList.add(matchTest === reverseTest && matchTest !== '' ? 'palindrome' : 'not-palindrome');
+        input.classList.remove(matchTest === reverseTest && matchTest !== '' ? 'not-palindrome' : 'palindrome');
+    }
+</script>
+</html>
